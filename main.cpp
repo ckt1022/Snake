@@ -25,14 +25,19 @@ vector<RectangleShape> generateWall(int wallSize,int wigth,int length,int id){
 	for(int x = 0;x<wigth;x+=wallSize)
 		wall.push_back(generateRectangle(wallSize,x,wigth-wallSize,Color::Cyan));
 
+<<<<<<< HEAD
 	if(id == 1){
+=======
+	}
+	if(id == 0){
+>>>>>>> origin/master
 		for(int x=0;x<wigth;x+=wallSize){
 			for(int y=0;y<length - wallSize;y+=wallSize){
 				if(x == 0 || x == wigth-wallSize || y == 0 || y == length-wallSize)
 					wall.push_back(generateRectangle(wallSize,x,y,Color::Cyan));
 			}
 		}
-	}else if(id == 2){
+	}else if(id == 1){
 		for(int x = 0;x < wigth;x += wallSize){
 			for(int y = 0;y<wigth;y+=wallSize){
 				if((x == 100 && y > 100) || (y == 600 && x > 300) || (y == 100 && (x >=100 && x < 500)))
@@ -90,6 +95,7 @@ int main()
     }
 
 	//顯示訊息設定
+<<<<<<< HEAD
 	//起始畫面
 	bool start = true;
 	Text startText("Snake Game",font,60);
@@ -99,17 +105,23 @@ int main()
 	option1.setFillColor(Color::Blue);
 
 	//得分訊息
+=======
+>>>>>>> origin/master
 	Text scoreText;
     scoreText.setFont(font);
 	scoreText.setPosition(20,810);
     scoreText.setCharacterSize(24);
     scoreText.setFillColor(Color::White);
 	
+<<<<<<< HEAD
 	//結束訊息
+=======
+>>>>>>> origin/master
 	Text gameText("Game Over !!",font,60);
 	gameText.setPosition(175,350);
 	gameText.setFillColor(Color::Red);
 
+<<<<<<< HEAD
 	Text endText("Press 'Space' to start a new game\n	Press 'LShift' to home page",font,25);
 	endText.setPosition(150,425);
 	endText.setFillColor(Color::White);
@@ -119,6 +131,11 @@ int main()
 	endScore.setCharacterSize(20);
 	endScore.setPosition(10,10);
 	endScore.setFillColor(Color::White);
+=======
+	Text endText("Pressed 'Space' to start a new game",font,25);
+	endText.setPosition(150,425);
+	endText.setFillColor(Color::Blue);
+>>>>>>> origin/master
 
 	//main window loop
     while (window.isOpen())
@@ -127,6 +144,22 @@ int main()
         Event event;
 	    while (window.pollEvent(event))
         {
+			if(gameOver && Keyboard::isKeyPressed(Keyboard::Space)){
+				snake.erase(snake.begin()+2,snake.end());
+				snake[1].setSize(Vector2f(snakeSize, snakeSize));
+    			snake[1].setPosition(wigth/2-snakeSize/2-10,wigth/2-snakeSize/2-10);
+    			snake[1].setFillColor(Color::Red);
+				
+				int tempX,tempY;
+				do{
+					tempX = rand() % (wigth/snakeSize) * snakeSize;
+					tempY = rand() % (wigth/snakeSize) * snakeSize;
+				}while(!checkValidStep(wall,tempX,tempY));
+					
+				snake[0].setPosition(tempX,tempY);
+
+				gameOver = false;
+			}
             if (event.type == Event::Closed)
                 window.close();
 			//起始與結束介面邏輯判斷
@@ -209,12 +242,16 @@ int main()
         window.clear();
 		
 		//顯示畫面
+<<<<<<< HEAD
 		if(start){
 			window.draw(startText);
 			window.draw(option1);
 		}else if(gameOver){
 			endScore.setString("Final Score: "+ to_string(snake.size()-2) + "	 Level: " + to_string((snake.size())/5));
 			window.draw(endScore);
+=======
+		if(gameOver){
+>>>>>>> origin/master
 			window.draw(gameText);
 			window.draw(endText);
 		}else{

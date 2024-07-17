@@ -26,14 +26,14 @@ vector<RectangleShape> generateWall(int wallSize,int wigth,int length,int id){
 		wall.push_back(generateRectangle(wallSize,x,wigth-wallSize,Color::Cyan));
 
 
-	if(id == 0){
+	if(id == 1){
 		for(int x=0;x<wigth;x+=wallSize){
 			for(int y=0;y<length - wallSize;y+=wallSize){
 				if(x == 0 || x == wigth-wallSize || y == 0 || y == length-wallSize)
 					wall.push_back(generateRectangle(wallSize,x,y,Color::Cyan));
 			}
 		}
-	}else if(id == 1){
+	}else if(id == 2){
 		for(int x = 0;x < wigth;x += wallSize){
 			for(int y = 0;y<wigth;y+=wallSize){
 				if((x == 100 && y > 100) || (y == 600 && x > 300) || (y == 100 && (x >=100 && x < 500)))
@@ -217,6 +217,8 @@ int main()
 		}else if(gameOver){
 			endScore.setString("Final Score: "+ to_string(snake.size()-2) + "	 Level: " + to_string((snake.size())/5));
 			window.draw(endScore);
+			window.draw(gameText);
+			window.draw(endText);
 		}else{
         	for (int i = 0; i < snake.size(); i++)
             	window.draw(snake[i]);
